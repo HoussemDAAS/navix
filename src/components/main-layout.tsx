@@ -53,8 +53,13 @@ export default function MainLayout({ children }: { children: ReactNode }) {
             e.preventDefault();
             e.stopPropagation();
             
-            // Mobile gesture detection for audio unlock
-            console.log('📱 Voice button tapped - enabling audio');
+            // ENHANCED Mobile gesture detection for audio unlock
+            console.log('📱 Voice button tapped - enabling audio contexts');
+            
+            // iOS SAFARI FIX: Comprehensive audio unlocking
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isIOS = /iphone|ipad|ipod/.test(userAgent);
+            const isAndroid = userAgent.includes('android');
             
             // Enable audio context immediately on touch (critical for mobile)
             if (window.AudioContext || (window as any).webkitAudioContext) {
@@ -72,9 +77,54 @@ export default function MainLayout({ children }: { children: ReactNode }) {
               }
             }
 
-            // Enable speech synthesis voices loading
+            // iOS FIX: Silent audio playback to unlock audio
+            if (isIOS) {
+              console.log('🍏 iOS detected - unlocking audio with silent playback');
+              const silentAudio = new Audio();
+              silentAudio.src = 'data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjQ1LjEwMAAAAAAAAAAAAAAA//OEAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAEAAABIADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDA4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg//////////////////////////////////////////////////////////////////8AAAAATGF2YzU4Ljc3AAAAAAAAAAAAAAAAJAAAAAAAAAAAASAA8y6nvwAAAAAAAAAAAAAAAAAAAAD/80DEAAAAI0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NCxAAAAAAjSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NCxAAAAAAjSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV';
+              silentAudio.volume = 0.01;
+              silentAudio.setAttribute('playsinline', 'true');
+              silentAudio.setAttribute('webkit-playsinline', 'true');
+              
+              silentAudio.play()
+                .then(() => {
+                  console.log('🍏 iOS silent audio played - audio unlocked');
+                  silentAudio.pause();
+                  silentAudio.remove();
+                })
+                .catch((error) => {
+                  console.log('🍏 iOS silent audio failed:', error);
+                });
+            }
+
+            // Enable speech synthesis voices loading for all platforms
             if (window.speechSynthesis) {
+              // Load voices immediately
               window.speechSynthesis.getVoices();
+              
+              // iOS/Mobile FIX: Test speech synthesis with silent utterance
+              try {
+                const testUtterance = new SpeechSynthesisUtterance('');
+                testUtterance.volume = 0;
+                testUtterance.rate = 10; // Very fast to complete quickly
+                window.speechSynthesis.speak(testUtterance);
+                window.speechSynthesis.cancel(); // Cancel immediately
+                console.log('📱 Speech synthesis unlocked');
+              } catch (error) {
+                console.log('Speech synthesis unlock failed:', error);
+              }
+            }
+
+            // ANDROID FIX: Pre-request microphone for smoother experience
+            if (isAndroid && navigator.mediaDevices) {
+              navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                  console.log('📱 Android microphone pre-access successful');
+                  stream.getTracks().forEach(track => track.stop());
+                })
+                .catch(error => {
+                  console.log('📱 Android microphone pre-access failed:', error);
+                });
             }
             
             setIsVoiceAgentOpen(true);

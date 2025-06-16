@@ -274,6 +274,13 @@ export default function VoiceAIAgent({ isOpen, onClose, context = 'general', per
 
   const handleVoiceInput = useCallback(async (transcript: string) => {
     console.log('🎤 Processing voice input:', transcript);
+    
+    // ANDROID FIX: Prevent double processing
+    if (isProcessing) {
+      console.log('🚫 Already processing, ignoring duplicate transcript');
+      return;
+    }
+    
     setIsListening(false);
     setIsProcessing(true);
     
@@ -358,7 +365,7 @@ export default function VoiceAIAgent({ isOpen, onClose, context = 'general', per
       console.log('🔊 Playing error message with female voice...');
       await audioManager.speakWithElevenLabs(errorMessage, false);
     }
-  }, [context, locale, messages, checkForGoodbye, endConversation, audioManager]);
+  }, [context, locale, messages, checkForGoodbye, endConversation, audioManager, isProcessing]); // Added isProcessing dependency
 
   // Initialize recognition manager - ALWAYS CALLED IN SAME ORDER
   const recognitionManager = useVoiceRecognitionManager({
@@ -371,7 +378,8 @@ export default function VoiceAIAgent({ isOpen, onClose, context = 'general', per
     onListeningEnd: handleListeningEnd,
     onTranscript: handleVoiceInput,
     onError: handleError,
-    onAudioLevel: handleAudioLevel
+    onAudioLevel: handleAudioLevel,
+    onRestartListening // Added missing parameter
   });
 
   const handleMicButtonClick = useCallback(() => {

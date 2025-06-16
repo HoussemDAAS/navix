@@ -1,6 +1,7 @@
 import createMiddleware from 'next-intl/middleware';
+import { NextRequest, NextResponse } from 'next/server';
 
-export default createMiddleware({
+const intlMiddleware = createMiddleware({
   // A list of all locales that are supported
   locales: ['en', 'fr', 'ar'],
   
@@ -11,14 +12,41 @@ export default createMiddleware({
   localePrefix: 'always'
 });
 
+export default function middleware(request: NextRequest) {
+  const { pathname, hostname } = request.nextUrl;
+  
+  // Handle redirect from non-www to www with locale in one step
+  if (hostname === 'navixagency.tech') {
+    const url = request.nextUrl.clone();
+    url.hostname = 'www.navixagency.tech';
+    
+    // If it's the root path, redirect directly to /en to avoid double redirect
+    if (pathname === '/') {
+      url.pathname = '/en';
+      return NextResponse.redirect(url, 301);
+    }
+    
+    // For other paths, redirect to www and let intl middleware handle locale
+    return NextResponse.redirect(url, 301);
+  }
+  
+  // Handle the case where someone visits www.navixagency.tech/ directly
+  if (hostname === 'www.navixagency.tech' && pathname === '/') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/en';
+    return NextResponse.redirect(url, 301);
+  }
+  
+  // Apply internationalization middleware for all other cases
+  return intlMiddleware(request);
+}
+
 export const config = {
   // Match only internationalized pathnames, exclude API routes
   matcher: [
     // Enable a redirect to a matching locale at the root
     '/',
-    
-    // Set a cookie to remember the previous locale for
-    // all requests that have a locale prefix
+
     '/(ar|fr|en)/:path*',
     
     // Enable redirects that add missing locales

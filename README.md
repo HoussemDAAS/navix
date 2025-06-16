@@ -278,7 +278,7 @@ npm run upsert-content
 
 **Navix Growth Marketing Agency**
 
-📧 **Email**: [contact@navix.com](mailto:contact@navix.com)  
+📧 **Email**: [contact@navixagency.com](mailto:contact@navixagency.com)  
 📱 **Phone**: +216 50 699 724  
 🌐 **Website**: [navix.com](https://navix.com)  
 📍 **Location**: Manzel Jemil, Bizerte, Tunisia  

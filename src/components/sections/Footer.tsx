@@ -33,10 +33,10 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: PiFacebookLogo, href: "#" },
-    { icon: PiInstagramLogo, href: "#" },
-    { icon: PiLinkedinLogo, href: "#" },
-    { icon: PiTwitterLogo, href: "#" },
+    { icon: PiFacebookLogo, href: "https://facebook.com/navixagency" },
+    { icon: PiInstagramLogo, href: "https://instagram.com/navix.agency" },
+    { icon: PiLinkedinLogo, href: "https://linkedin.com/company/navix-agency" },
+    { icon: PiTwitterLogo, href: "https://twitter.com/navixagency" },
   ];
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -63,10 +63,10 @@ const Footer = () => {
               {t("Footer.letsTalk")}
             </h2>
             <Link
-              href="mailto:contact@navix.com"
+              href="mailto:contact@navixagency.tech"
               className="text-xl hover:underline inline-block mb-8"
             >
-              contact@navix.com
+              contact@navixagency.tech
             </Link>
             <p className="text-gray-600">
               Manzel Jemil, Bizerte

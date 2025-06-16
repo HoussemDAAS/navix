@@ -7,7 +7,7 @@ import ContentBlockRenderer from "@/components/ContentBlockRenderer";
 import { fetchProjectBySlug } from "@/services/projectService";
 import { notFound } from "next/navigation";
 import { FaHome } from "react-icons/fa";
-import Link from "next/link";
+import { Link } from "@/i18n/routing"; // Use i18n Link instead of next/link
 import AIRecommendations from "@/components/AIRecommendations";
 
 // Enhanced translations object with more comprehensive content

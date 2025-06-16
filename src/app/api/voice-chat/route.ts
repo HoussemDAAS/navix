@@ -87,9 +87,9 @@ export async function POST(req: NextRequest) {
     if (!apiKey) {
       console.error('Missing OPENAI_API_KEY');
       const fallbackMessages = {
-        'en': 'Hi! I\'m Navi, but my AI brain isn\'t configured right now. Please contact us directly at contact@navix.com or try our regular chat!',
-        'fr': 'Salut! Je suis Navi, mais mon cerveau IA n\'est pas configuré en ce moment. Contactez-nous directement à contact@navix.com!',
-        'ar': 'مرحباً! أنا نافي، لكن عقلي الذكي غير مُعدّ حالياً. تواصلوا معنا مباشرة على contact@navix.com!'
+        'en': 'Hi! I\'m Navi, but my AI brain isn\'t configured right now. Please contact us directly at contact@navixagency.tech or try our regular chat!',
+        'fr': 'Salut! Je suis Navi, mais mon cerveau IA n\'est pas configuré en ce moment. Contactez-nous directement à contact@navixagency.tech!',
+        'ar': 'مرحباً! أنا نافي، لكن عقلي الذكي غير مُعدّ حالياً. تواصلوا معنا مباشرة على contact@navixagency.tech!'
       };
       
       return Response.json({ 
@@ -181,9 +181,9 @@ Remember: You're the coolest AI assistant who actually knows their stuff and gen
         const parsed = JSON.parse(errorBody);
         if (parsed?.error?.code === 'insufficient_quota') {
           const quotaMessages = {
-            'en': 'I\'m temporarily unavailable due to high demand. You can reach our team directly at contact@navix.com or book a call!',
-            'fr': 'Je suis temporairement indisponible en raison de la forte demande. Contactez notre équipe à contact@navix.com!',
-            'ar': 'أنا غير متاحة مؤقتاً بسبب الطلب العالي. يمكنكم التواصل مع فريقنا على contact@navix.com!'
+            'en': 'I\'m temporarily unavailable due to high demand. You can reach our team directly at contact@navixagency.tech or book a call!',
+            'fr': 'Je suis temporairement indisponible en raison de la forte demande. Contactez notre équipe à contact@navixagency.tech!',
+            'ar': 'أنا غير متاحة مؤقتاً بسبب الطلب العالي. يمكنكم التواصل مع فريقنا على contact@navixagency.tech!'
           };
           userMessage = quotaMessages[locale as keyof typeof quotaMessages] || quotaMessages['en'];
         }
@@ -201,9 +201,9 @@ Remember: You're the coolest AI assistant who actually knows their stuff and gen
   } catch (err) {
     console.error('Voice chat API error:', err);
     const errorMessages = {
-      'en': 'Oops! Something went wrong on my end. Try asking me again, or contact us at contact@navix.com!',
-      'fr': 'Oups! Quelque chose s\'est mal passé de mon côté. Essayez de me redemander, ou contactez-nous à contact@navix.com!',
-      'ar': 'عذراً! حدث خطأ من جانبي. حاولوا سؤالي مرة أخرى، أو تواصلوا معنا على contact@navix.com!'
+      'en': 'Oops! Something went wrong on my end. Try asking me again, or contact us at contact@navixagency.tech!',
+      'fr': 'Oups! Quelque chose s\'est mal passé de mon côté. Essayez de me redemander, ou contactez-nous à contact@navixagency.tech!',
+      'ar': 'عذراً! حدث خطأ من جانبي. حاولوا سؤالي مرة أخرى، أو تواصلوا معنا على contact@navixagency.tech!'
     };
     
     return Response.json({ 

@@ -133,7 +133,7 @@ const Founders = () => {
       <div className={`flex justify-between items-center mb-12 ${isRTL ? 'flex-row-reverse' : ''}`}>
         <div className="text-center flex-1">
           <h2 className="text-3xl font-bold mb-2">
-            {t("Founders.title").replace("{count}", clients.length.toString())}
+            {t("Founders.title", { count: clients.length })}
           </h2>
           <p className="text-gray-600">
             {t("Founders.subtitle")}

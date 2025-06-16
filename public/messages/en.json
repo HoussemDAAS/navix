@@ -154,7 +154,12 @@
       "process": "Process"
     },
     "subtitle": "We blend design, video storytelling, and performance marketing to drive growth at every stage.",
-    "words": ["Agile", "Strategic", "Measurable", "End-to-End"]
+    "words": {
+      "word1": "Agile",
+      "word2": "Strategic", 
+      "word3": "Precise",
+      "word4": "Complete"
+    }
   },
   "BoxReveal": {
     "steps": {
@@ -213,6 +218,7 @@
   "Projects": {
     "title": "Strategic Campaign Showcase",
     "subtitle": "Explore data-driven campaigns where precision targeting met creative execution to boost client revenue by 150%+.",
+    "viewAll": "View All Projects",
     "hero": {
       "title1": "Projects that speak,",
       "title2": "results that matter.",

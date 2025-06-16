@@ -64,13 +64,13 @@ const CalendlyScheduling = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="text-center mt-8 space-y-4"
         >
-          <p className="text-gray-600">Having trouble with scheduling? </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="text-center space-y-2">
+            <p className="text-gray-600 mb-4">Having trouble? Contact us directly</p>
             <a
-              href="mailto:contact@navix.com"
-              className="text-lochmara-600 hover:text-lochmara-700 font-medium"
+              href="mailto:contact@navixagency.tech"
+              className="inline-block px-4 py-2 bg-lochmara-500 text-white rounded-lg hover:bg-lochmara-600 transition-colors mr-4"
             >
-              Email us directly: contact@navix.com
+              Email us directly: contact@navixagency.tech
             </a>
             <span className="hidden sm:block text-gray-400">•</span>
             <a

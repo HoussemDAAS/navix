@@ -22,7 +22,7 @@ export const config = {
     '/(ar|fr|en)/:path*',
     
     // Enable redirects that add missing locales
-    // (e.g. `/pathnames` -> `/en/pathnames`)
-    '/((?!_next|_vercel|.*\\..*).*)'
+    // Exclude Sanity Studio, API routes, static files, and Next.js internals
+    '/((?!api|sanity|studio|_next|_vercel|.*\\..*).*)'
   ]
 };

@@ -69,9 +69,9 @@ export async function POST(req: NextRequest) {
     if (!apiKey) {
       console.error('Missing OPENAI_API_KEY');
       const fallbackMessages = {
-        'en': 'AI is not configured. Please contact us directly at contact@navix.com',
-        'fr': 'IA non configurée. Veuillez nous contacter directement à contact@navix.com',
-        'ar': 'الذكاء الاصطناعي غير مُعدّ. يرجى التواصل معنا مباشرة على contact@navix.com'
+        'en': 'AI is not configured. Please contact us directly at contact@navixagency.tech',
+        'fr': 'IA non configurée. Veuillez nous contacter directement à contact@navixagency.tech',
+        'ar': 'الذكاء الاصطناعي غير مُعدّ. يرجى التواصل معنا مباشرة على contact@navixagency.tech'
       };
       
       return Response.json({ 
@@ -123,9 +123,9 @@ export async function POST(req: NextRequest) {
         const parsed = JSON.parse(errorBody);
         if (parsed?.error?.code === 'insufficient_quota') {
           const quotaMessages = {
-            'en': 'Our AI assistant is temporarily unavailable. Please contact us directly at contact@navix.com or book a call below.',
-            'fr': 'Notre assistant IA est temporairement indisponible. Veuillez nous contacter directement à contact@navix.com ou réserver un appel ci-dessous.',
-            'ar': 'مساعدنا الذكي غير متاح مؤقتاً. يرجى التواصل معنا مباشرة على contact@navix.com أو احجز مكالمة أدناه.'
+            'en': 'Our AI assistant is temporarily unavailable. Please contact us directly at contact@navixagency.tech or book a call below.',
+            'fr': 'Notre assistant IA est temporairement indisponible. Veuillez nous contacter directement à contact@navixagency.tech ou réserver un appel ci-dessous.',
+            'ar': 'مساعدنا الذكي غير متاح مؤقتاً. يرجى التواصل معنا مباشرة على contact@navixagency.tech أو احجز مكالمة أدناه.'
           };
           userMessage = quotaMessages[locale as keyof typeof quotaMessages] || quotaMessages['en'];
         } else if (parsed?.error?.message) {

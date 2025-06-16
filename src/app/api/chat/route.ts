@@ -63,7 +63,7 @@ ${projectData}
 When users ask about projects, examples, or our work, mention these specific projects! You can describe them and suggest they visit our projects page to see more details and case studies.
 ` : ''}
 
-📞 CONTACT: hello@navix.ma | Free consultation available
+📞 CONTACT: contact@navixagency.tech | Free consultation available
 
 ${isVoiceChat ? `
 VOICE CONVERSATION RULES:

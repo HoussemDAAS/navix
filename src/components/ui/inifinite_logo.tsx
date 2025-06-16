@@ -108,6 +108,8 @@ export const InfiniteMovingLogos = ({
                     alt={item.name}
                     width={160}
                     height={80}
+                    loading="lazy"
+                    sizes="(max-width: 768px) 120px, 160px"
                     className="w-full h-full object-contain"
                   />
                 </Link>
@@ -117,6 +119,8 @@ export const InfiniteMovingLogos = ({
                   alt={item.name}
                   width={160}
                   height={80}
+                  loading="lazy"
+                  sizes="(max-width: 768px) 120px, 160px"
                   className="w-full h-full object-contain"
                 />
               )}

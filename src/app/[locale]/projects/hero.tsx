@@ -216,7 +216,7 @@ const ProjectHero = ({ locale }: ProjectHeroProps) => {
                   className={viewMode === 'grid' ? "mb-6 break-inside-avoid" : "mb-6"}
                   dir={isRTL ? "rtl" : "ltr"}
                 >
-                  <Link href={`/${locale}/projects/${slug}`} className="block w-full group">
+                  <Link href={`/projects/${slug}`} className="block w-full group">
                     <div className={`bg-white/70 backdrop-blur-sm rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group-hover:scale-[1.02] ${
                       viewMode === 'list' ? 'flex' : ''
                     }`}>
@@ -226,13 +226,17 @@ const ProjectHero = ({ locale }: ProjectHeroProps) => {
                         {mainImage && mainImage.asset && mainImage.asset.url ? (
                           <Image
                             src={mainImage.asset.url}
-                            alt={project.title}
+                            alt={`${project.title} - ${project.client.name} project showcase`}
                             width={viewMode === 'list' ? 256 : width}
                             height={viewMode === 'list' ? 192 : height}
-                            quality={90}
+                            quality={85} // Reduced from 90 for better performance
                             className={`object-cover ${
                               viewMode === 'list' ? 'w-full h-48' : 'w-full h-auto'
                             }`}
+                            placeholder="blur"
+                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkbHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                            sizes={viewMode === 'list' ? '256px' : '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'}
+                            priority={false} // Only hero images should have priority
                           />
                         ) : (
                           <div className={`bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center ${

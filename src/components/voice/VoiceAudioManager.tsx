@@ -57,6 +57,62 @@ export default function useVoiceAudioManager({
     };
   }, [hasUserGesture]);
 
+  // IOS SAFARI FIX: Enhanced user gesture detection and audio unlocking
+  useEffect(() => {
+    const unlockAudio = () => {
+      if (!hasUserGesture) {
+        setHasUserGesture(true);
+        console.log('🍏 iOS: Unlocking audio with user gesture');
+        
+        // Create a silent audio element to unlock iOS audio
+        const silentAudio = new Audio();
+        silentAudio.src = 'data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjQ1LjEwMAAAAAAAAAAAAAAA//OEAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAEAAABIADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDA4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg//////////////////////////////////////////////////////////////////8AAAAATGF2YzU4Ljc3AAAAAAAAAAAAAAAAJAAAAAAAAAAAASAA8y6nvwAAAAAAAAAAAAAAAAAAAAD/80DEAAAAI0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NCxAAAAAAjSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NCxAAAAAAjSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV';
+        silentAudio.volume = 0.01; // Very low volume
+        silentAudio.preload = 'auto';
+        
+        // iOS Safari specific attributes
+        silentAudio.setAttribute('playsinline', 'true');
+        silentAudio.setAttribute('webkit-playsinline', 'true');
+        
+        const playPromise = silentAudio.play();
+        if (playPromise) {
+          playPromise.then(() => {
+            console.log('🍏 iOS: Silent audio played - audio unlocked');
+            silentAudio.pause();
+            silentAudio.remove();
+          }).catch((error) => {
+            console.log('🍏 iOS: Silent audio failed:', error);
+          });
+        }
+        
+        // Also unlock speech synthesis on iOS
+        if (window.speechSynthesis) {
+          try {
+            const utterance = new SpeechSynthesisUtterance('');
+            utterance.volume = 0;
+            window.speechSynthesis.speak(utterance);
+            window.speechSynthesis.cancel();
+            console.log('🍏 iOS: Speech synthesis unlocked');
+          } catch (error) {
+            console.log('🍏 iOS: Speech synthesis unlock failed:', error);
+          }
+        }
+      }
+    };
+
+    // More aggressive event listening for iOS
+    const iosEvents = ['touchstart', 'touchend', 'click', 'tap', 'mousedown'];
+    iosEvents.forEach(event => {
+      document.addEventListener(event, unlockAudio, { once: true, passive: true });
+    });
+
+    return () => {
+      iosEvents.forEach(event => {
+        document.removeEventListener(event, unlockAudio);
+      });
+    };
+  }, [hasUserGesture]);
+
   // MOBILE-OPTIMIZED TTS with multiple fallbacks
   const speakWithElevenLabs = useCallback(async (text: string, isGoodbye: boolean = false) => {
     try {

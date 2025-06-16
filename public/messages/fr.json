@@ -105,6 +105,9 @@
     "submit": "Soumettre",
     "cancel": "Annuler",
     "close": "Fermer",
+    "bookCall": "Réserver un Appel",
+    "getStarted": "Commencer",
+    "learnMore": "En Savoir Plus",
     "next": "Suivant",
     "previous": "Précédent",
     "save": "Enregistrer",
@@ -126,7 +129,12 @@
       "process": "Processus"
     },
     "subtitle": "Nous combinons design, narration vidéo et marketing de performance pour stimuler la croissance à chaque étape.",
-    "words": ["Agile", "Stratégique", "Mesurable", "Complet"]
+    "words": {
+      "word1": "Agile",
+      "word2": "Stratégique", 
+      "word3": "Précis",
+      "word4": "Complet"
+    }
   },
   "BoxReveal": {
     "steps": {
@@ -185,6 +193,7 @@
   "Projects": {
     "title": "Vitrine de Campagnes Stratégiques",
     "subtitle": "Explorez des campagnes basées sur les données où le ciblage de précision a rencontré l'exécution créative pour augmenter les revenus clients de 150%+.",
+    "viewAll": "Voir Tous les Projets",
     "hero": {
       "title1": "Des projets qui parlent,",
       "title2": "des résultats qui comptent.",
@@ -397,7 +406,7 @@
         "prepare": "• Nous préparerons une proposition stratégique personnalisée",
         "contact": "• Nous vous contacterons avec des recommandations et prochaines étapes"
       },
-      "questions": "Des questions ? Contactez-nous à hello@navix.ma",
+      "questions": "Des questions ? Contactez-nous à contact@navixagency.tech",
       "closeButton": "Fermer"
     }
   },
@@ -423,5 +432,12 @@
     "browserNotSupported": "Votre navigateur ne supporte pas la reconnaissance vocale",
     "error": "Une erreur s'est produite. Veuillez réessayer.",
     "placeholder": "Demandez-moi tout sur les services Navix..."
+  },
+  "Trusted": {
+    "title": "Approuvé par des Marques en Croissance Rapide",
+    "stats": {
+      "happyClients": "Clients Satisfaits",
+      "projectsCompleted": "Projets Terminés"
+    }
   }
 }

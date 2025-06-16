@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PiSparkle, PiCalendarCheck } from "react-icons/pi";
+import { PiEnvelope } from "react-icons/pi";
 import Confetti from "./Confetti";
 import { useTranslations } from "@/hooks/useTranslations";
 
@@ -364,7 +365,7 @@ export default function AIContactForm() {
                   </div>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <a
-                      href="mailto:contact@navix.com"
+                      href="mailto:contact@navixagency.tech"
                       className="px-4 py-2 text-sm font-medium text-lochmara-600 hover:text-lochmara-700 hover:bg-lochmara-50 rounded-lg transition-colors"
                     >
                       📧 {t('AIContactForm.calendly.emailUs')}
@@ -679,7 +680,7 @@ export default function AIContactForm() {
                     {t('AIContactForm.startOver')}
                   </button>
                   <a
-                    href="mailto:contact@navix.com"
+                    href="mailto:contact@navixagency.tech"
                     className="flex-1 text-sm text-lochmara-600 hover:text-lochmara-700 py-3 px-4 rounded-xl hover:bg-lochmara-50 transition-colors font-medium"
                   >
                     {t('AIContactForm.emailInstead')}

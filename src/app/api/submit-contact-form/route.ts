@@ -74,7 +74,7 @@ ${conversationText}
     if (process.env.RESEND_API_KEY) {
       await resend.emails.send({
         from: 'AI Contact Form <onboarding@resend.dev>', // Change this to your verified domain
-        to: ['houssemdaas2@gmail.com'], // Change this to your email
+        to: ['contact@navixagency.com'], // Change this to your email
         subject: `🎯 New ${submission.service} Lead - ${submission.contactInfo.fullName}`,
         html: emailHtml,
         text: emailText,
